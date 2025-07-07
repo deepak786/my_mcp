@@ -1,0 +1,6 @@
+.env
+.cursor/
+.venv/
+.vscode/
+binance_mcp/__pycache__/
+uv.lock
