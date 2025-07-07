@@ -18,7 +18,8 @@ ACTIVITY_LOG_FILE = THIS_DIR / "activity.log"
 MCP_HTTP = os.getenv("MCP_HTTP", "false").lower() == "true"
 
 port = int(os.environ.get("PORT", 7860))
-mcp = FastMCP("Binance MCP", port=port) if MCP_HTTP else FastMCP("Binance MCP")
+host = "0.0.0.0"  # Required for Render
+mcp = FastMCP("Binance MCP", port=port, host=host) if MCP_HTTP else FastMCP("Binance MCP")
 
 def get_symbol_from_name(name: str) -> str:
     if(name.lower() in ["btc", "bitcoin"]):
