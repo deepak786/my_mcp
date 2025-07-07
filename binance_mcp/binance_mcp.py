@@ -17,7 +17,8 @@ ACTIVITY_LOG_FILE = THIS_DIR / "activity.log"
 # if it is true, the MCP server will run in HTTP mode, otherwise it will run in stdio mode
 MCP_HTTP = os.getenv("MCP_HTTP", "false").lower() == "true"
 
-mcp = FastMCP("Binance MCP", port=7860) if MCP_HTTP else FastMCP("Binance MCP")
+port = int(os.environ.get("PORT", 7860))
+mcp = FastMCP("Binance MCP", port=port) if MCP_HTTP else FastMCP("Binance MCP")
 
 def get_symbol_from_name(name: str) -> str:
     if(name.lower() in ["btc", "bitcoin"]):
@@ -118,7 +119,7 @@ if __name__ == "__main__":
     if(not Path(ACTIVITY_LOG_FILE).exists()):
         Path(ACTIVITY_LOG_FILE).touch()
     # start the MCP server
-    mcp.run(transport="sse" if MCP_HTTP else "stdio")
+    mcp.run(transport="streamable-http" if MCP_HTTP else "stdio")
     
 # npx @modelcontextprotocol/inspector /Users/deepakgoyal/Desktop/Workspace/00Samples/MCP/.venv/bin/python /Users/deepakgoyal/Desktop/Workspace/00Samples/MCP/binance_mcp/binance_mcp.py
 # mcp dev binance_mcp/binance_mcp.py
