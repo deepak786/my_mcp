@@ -118,7 +118,7 @@ if __name__ == "__main__":
     if(not Path(ACTIVITY_LOG_FILE).exists()):
         Path(ACTIVITY_LOG_FILE).touch()
     # start the MCP server
-    mcp.run(transport="streamable-http" if MCP_HTTP else "stdio")
+    mcp.run(transport="sse" if MCP_HTTP else "stdio")
     
 # npx @modelcontextprotocol/inspector /Users/deepakgoyal/Desktop/Workspace/00Samples/MCP/.venv/bin/python /Users/deepakgoyal/Desktop/Workspace/00Samples/MCP/binance_mcp/binance_mcp.py
 # mcp dev binance_mcp/binance_mcp.py
